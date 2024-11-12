@@ -1,30 +1,14 @@
-<html>
-    <head>
-        <title>Django Blog</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="/">Django Blog</a></h1>
-        </div>
-            {% for post in posts %} {{ post }}        
-            <div>
-                <p> publicado: {{ post.published_date }}</p>
-                <h2><a href="">{{ post.title }}</a></h2>
-                <p>{{ post.text|linebreaksbr }}</p>
-            </div>
-            {% endfor%}
-        <div>
-            <p>publicado: 31.10.24, 2:30am</p>
-            <h2><a href"">Mi primer Post</a></h2>
-            <p>¿Qué son los Modelos en Django?:
-                Django es un potente framework de desarrollo web en Python que sigue el patrón arquitectónico Modelo-Vista-Controlador (MVC), aunque en Django se le conoce como Modelo-Vista-Template (MVT). En este contexto, los modelos son una parte fundamental que permite interactuar con la base de datos de manera eficiente y organizada. </p>
-        </div>
 
-        <div>
-            <p>publicado: 1.11.24, 2:30pm</p>
-            <h2><a href"">Mi segundo Post</a></h2>
-            <p>¿Qué es PythonAnywhere?:
-                PythonAnywhere es un entorno de desarrollo web basado en la nube que permite a los usuarios ejecutar y desarrollar aplicaciones en Python sin necesidad de configurar un servidor local.  </p>
-        </div>
-    </body>
-</html>
+{% extends 'blog/base.html' %}
+
+        {% block content %}
+            {% for post in posts %}
+                <div class="post">
+                    <div class="date">
+                        <p>publicado: {{ post.published_date }}</p>
+                    </div>
+                    <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+                    <p>{{ post.text|linebreaksbr }}</p>
+                </div>
+            {% endfor %}
+        {% endblock %}
